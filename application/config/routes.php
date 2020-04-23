@@ -52,8 +52,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // myself routes
 $route['blog-me/(:num)']= "blog/hi/$1";
+$route['usertype']= "usertype";
 
-$route['default_controller'] = 'pages/view';
+$route['default_controller'] = 'welcome';
 $route['(:any)'] = 'pages/view/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

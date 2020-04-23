@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+use Carbon\Carbon;
 
 class Welcome extends CI_Controller {
 
@@ -20,6 +21,13 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+
+		printf("Right now is %s", Carbon::now()->toDateTimeString());
+		printf("Right now in Vancouver is %s", Carbon::now('America/Vancouver'));  //implicit __toString()
+		echo $tomorrow = Carbon::now()->addDay();
+		echo $lastWeek = Carbon::now()->subWeek();
+		echo $nextSummerOlympics = Carbon::createFromDate(2016)->addYears(4);
+		return;
 		$this->load->view('welcome_message');
 	}
 }
