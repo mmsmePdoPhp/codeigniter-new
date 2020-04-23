@@ -1,4 +1,6 @@
-$red: red;
+@import url('./../node_modules/bootstrap/dist/css/bootstrap.min.css');
+
+$teal: rgb(58, 231, 231);
 body{
-	background-color: $red;
+	background-color: $teal;
 }
