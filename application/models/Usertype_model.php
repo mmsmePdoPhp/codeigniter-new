@@ -28,7 +28,28 @@ class Usertype_model extends MY_Model
 			return $this->db->insert('usertype', $data);
 		}
 	}
+	
+	/***
+	 * set new user type in database if not exists
+	 */
+	public function update_usertype()
+	{
+		$data = array(
+			'id' => $this->input->post('id'),
+			'usertype' => $this->input->post('usertype'),
+			'isactive' => $this->input->post('isactive') == 'on' ? 1 : 0,
+		);
 
+		//if usertype not exsit insert
+		$query = $this->db->get_where('userType', array('id' => $data['id']));
+		if ($query->row_array()) {
+			//if exist update 
+			return $this->db->replace('usertype', $data);
+			
+		} else {
+			return false; // return false for handle error and redirect user
+		}
+	}
 	/**
 	 * get all usertypes
 	 */
@@ -68,6 +89,25 @@ class Usertype_model extends MY_Model
 				$this->db->select('id,usertype,isActive,created_at,updated_at,deleted_at');
 			break;
 		}
+
+		$query = $this->db->get('usertype');
+
+		if (count($query->result())) {
+			//show information
+			return $query->result();
+		} else {
+			//return false for controll logic
+			return false;
+		}
+	}
+	
+	/**
+	 * get one  usertypes by its id
+	 */
+	public function get_usertype_byId($id)
+	{
+		$this->db->select('*');
+		$this->db->where('id',$id); // Produces: WHERE name = 'Joe'
 
 		$query = $this->db->get('usertype');
 

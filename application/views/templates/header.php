@@ -36,4 +36,28 @@ to get the desired effect
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 	<div id="app">
+	<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="content-header">
+		<div class="container-fluid">
+			
+	<?php if (isset($_SESSION['insert_success'])) : ?>
+						<div class="alert alert-primary alert-dismissible fade show" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+								<span class="sr-only">Close</span>
+							</button>
+							<?php echo $_SESSION['insert_success']; ?>
+						</div>
+					<?php endif; ?>
 
+
+					<?php if (isset($_SESSION['insert_error'])) : ?>
+						<div class="alert alert-danger alert-dismissible fade show" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+								<span class="sr-only">Close</span>
+							</button>
+							<?php echo $_SESSION['insert_error']; ?>
+						</div>
+					<?php endif; ?>

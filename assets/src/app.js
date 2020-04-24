@@ -13,28 +13,39 @@ new Vue({
 		columns:null
 	},
 	methods: {
-		async showUserType(e) {
+		async showUserType(e,tag=null) {
 			let that = this;
-			e.preventDefault();
-			//clearn data
-			that.userTypes=null;
-			let listclass=Array.from(e.srcElement.parentElement.parentElement.children).forEach(item => {
-				item.children[0].classList.remove('bg-teal')
-				item.children[0].classList.remove('hvr-wobble-vertical')
-			});
-			
-			e.toElement.classList.add('bg-teal')
-			e.toElement.classList.add('hvr-wobble-vertical')
+			if(tag==null){
+				e.preventDefault();
+				//clearn data
+				that.userTypes=null;
+				let listclass=Array.from(e.srcElement.parentElement.parentElement.children).forEach(item => {
+					item.children[0].classList.remove('bg-teal')
+					item.children[0].classList.remove('hvr-wobble-vertical')
+				});
+				
+				e.toElement.classList.add('bg-teal')
+				e.toElement.classList.add('hvr-wobble-vertical')
+			}
 
 			// Make a request for a user with a given ID
-			await axios.get('http://localhost/ciblog/usertype/ajaxindex/'+e.target.innerText)
+			let url;
+			if(tag==null){
+				url = 'http://localhost/ciblog/usertype/ajaxindex/'+e.target.innerText
+			}else{
+				url = 'http://localhost/ciblog/usertype/ajaxindex/'+tag
+			}
+			await axios.get(url)
 				.then(function (response) {
 					//if operation code was set add field edit for all user
 					that.userTypes= response.data;
-					if(e.target.innerText=='operation'){
-						that.userTypes.map(item => {
-							item.edit = 'edit'
-						})
+					if(tag==null){
+						if(e.target.innerText=='operation'){
+							that.userTypes.map(item => {
+								item.edit = 'edit'
+							})
+							
+						}
 					}
 					
 					//get all column value
@@ -71,9 +82,11 @@ new Vue({
 	computed: {
 		
 	},
-	created: function () {
-		// `this` points to the vm instance
-		console.log('a is: ' + this.a)
+	mounted: function () {
+		//get usertype with type atglance
+		this.showUserType(null,this.$refs.atglance.innerText);
+		this.$refs.atglance.classList.add('bg-teal')
+		
 	}
 })
 

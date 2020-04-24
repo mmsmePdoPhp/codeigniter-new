@@ -2785,34 +2785,48 @@ new Vue({
   },
   methods: {
     showUserType: function showUserType(e) {
-      var _this = this;
+      var _arguments = arguments,
+          _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var that, listclass;
+        var tag, that, listclass, url;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                tag = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : null;
                 that = _this;
-                e.preventDefault(); //clearn data
 
-                that.userTypes = null;
-                listclass = Array.from(e.srcElement.parentElement.parentElement.children).forEach(function (item) {
-                  item.children[0].classList.remove('bg-teal');
-                  item.children[0].classList.remove('hvr-wobble-vertical');
-                });
-                e.toElement.classList.add('bg-teal');
-                e.toElement.classList.add('hvr-wobble-vertical'); // Make a request for a user with a given ID
+                if (tag == null) {
+                  e.preventDefault(); //clearn data
 
-                _context.next = 8;
-                return axios.get('http://localhost/ciblog/usertype/ajaxindex/' + e.target.innerText).then(function (response) {
+                  that.userTypes = null;
+                  listclass = Array.from(e.srcElement.parentElement.parentElement.children).forEach(function (item) {
+                    item.children[0].classList.remove('bg-teal');
+                    item.children[0].classList.remove('hvr-wobble-vertical');
+                  });
+                  e.toElement.classList.add('bg-teal');
+                  e.toElement.classList.add('hvr-wobble-vertical');
+                } // Make a request for a user with a given ID
+
+
+                if (tag == null) {
+                  url = 'http://localhost/ciblog/usertype/ajaxindex/' + e.target.innerText;
+                } else {
+                  url = 'http://localhost/ciblog/usertype/ajaxindex/' + tag;
+                }
+
+                _context.next = 6;
+                return axios.get(url).then(function (response) {
                   //if operation code was set add field edit for all user
                   that.userTypes = response.data;
 
-                  if (e.target.innerText == 'operation') {
-                    that.userTypes.map(function (item) {
-                      item.edit = 'edit';
-                    });
+                  if (tag == null) {
+                    if (e.target.innerText == 'operation') {
+                      that.userTypes.map(function (item) {
+                        item.edit = 'edit';
+                      });
+                    }
                   } //get all column value
 
 
@@ -2823,7 +2837,7 @@ new Vue({
                 })["finally"](function () {// always executed
                 });
 
-              case 8:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -2848,9 +2862,10 @@ new Vue({
     }
   },
   computed: {},
-  created: function created() {
-    // `this` points to the vm instance
-    console.log('a is: ' + this.a);
+  mounted: function mounted() {
+    //get usertype with type atglance
+    this.showUserType(null, this.$refs.atglance.innerText);
+    this.$refs.atglance.classList.add('bg-teal');
   }
 });
 
