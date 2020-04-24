@@ -8,7 +8,7 @@ new Vue({
 	el: '#app',
 	data: {
 		msg: 'hi from mssg',
-		a: 1,
+		a: 1, 
 		userTypes:null,
 		columns:null
 	},
