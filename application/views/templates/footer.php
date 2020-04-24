@@ -8,6 +8,7 @@
     </div>
   </footer>
 </div>
+</div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
@@ -22,7 +23,10 @@
   <!-- OPTIONAL SCRIPTS -->
   <script src="<?php echo base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/thdist/js/demo.js"></script>
-  <script src="<?php echo base_url(); ?>assets/thdist/js/pages/dashboard3.js"></script>
+	<script src="<?php echo base_url(); ?>assets/thdist/js/pages/dashboard3.js"></script>
+	
+	<!-- custome script -->
+  <script src="<?php echo base_url(); ?>assets/dist/app.js"></script>
 </body>
 </body>
 </html>

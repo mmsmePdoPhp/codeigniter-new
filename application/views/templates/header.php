@@ -17,6 +17,10 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/app.css">
+	
+  <script src="<?php echo base_url(); ?>assets/node_modules/vue/dist/vue.js"></script>
+
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -31,3 +35,5 @@ to get the desired effect
 
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
+	<div id="app">
+

@@ -13,25 +13,36 @@ class MY_Controller extends CI_Controller {
 	/**
  	* load views with header and footer
 	*/
-	public function loadview(Array $views){
-		//default
-		$this->load->view('templates/header');
+	public function loadhead($home=false){
+        //default
+        $this->load->view('templates/header');
 		$this->load->view('templates/navbar');
-		if(count($views)>0){
-			foreach ($views as $key => $view) {
-				$this->load->view($view);
-			}
-		}else{
-			$this->load->view('dashboard/dashboard');
-		}
 
+        if ($home===true) {
+            $this->load->view('dashboard/dashboard');
+        }
+	}
+	public function loaddown($home=false){
 		//default
 		$this->load->view('templates/rightsidebar');
 
 		//default
 		$this->load->view('templates/footer');
 
-	 }
+	}
+			
+
+	/**
+	 * die dump function for testing
+	 */
+
+	public function dd($data){
+		echo '<pre>';
+		print_r($data);
+		echo '</pre>';
+
+		exit;
+	}
 
 	
 }
