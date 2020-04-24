@@ -59,7 +59,6 @@ class Usertype extends MY_Controller
 		} else {
 			echo 'false';
 		}
-
 		$this->loadhead();
 		$this->load->view('dashboard/usertype/index', $data);
 		$this->loaddown();
@@ -80,35 +79,35 @@ class Usertype extends MY_Controller
 			// $this->dd($this->input->get(null,true));
 			switch ($tag) {
 				case 'atglance':
-					$data['usertypes'] = ($this->usertype_model->get_usertype($tag));
+					$response =  ($this->usertype_model->get_usertype($tag));
 					break;
 
 				case 'active':
-					$response = ($data['usertypes'] = ($this->usertype_model->get_usertype($tag)));
+					$response =  ($this->usertype_model->get_usertype($tag));
 					// $response = array('status' => 'OK');
 
-					$this->output
-						->set_status_header(200)
-						->set_content_type('application/json', 'utf-8')
-						->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
-						->_display();
-					exit;
+					
 					break;
 
 				case 'notactive':
-					$data['usertypes'] = ($this->usertype_model->get_usertype($tag));
+					$response =  ($this->usertype_model->get_usertype($tag));
 					break;
 
 				case 'deleted':
-					$data['usertypes'] = ($this->usertype_model->get_usertype($tag));
+					$response =  ($this->usertype_model->get_usertype($tag));
 					break;
 
 				case 'fullinfo':
-					$data['usertypes'] = ($this->usertype_model->get_usertype($tag));
+					$response =  ($this->usertype_model->get_usertype($tag));
 					break;
 			}
 
-			$data['columns'] = ($this->db->list_fields('usertype'));
+			$this->output
+				->set_status_header(200)
+				->set_content_type('application/json', 'utf-8')
+				->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+				->_display();
+			exit;
 		} else {
 			echo 'false';
 		}

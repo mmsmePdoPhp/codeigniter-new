@@ -36,19 +36,25 @@ class Usertype_model extends MY_Model
 	{
 		switch ($tag) {
 			case 'atglance':
-				$this->db->select('id,usertype,isActive,created_at,updated_at,deleted_at');
+				$this->db->select('id,usertype,isActive,created_at');
 			break;
 
 			case 'active':
 				$this->db->select('id,usertype,isActive,created_at,updated_at,deleted_at');
+				$this->db->where('isActive', 1); // Produces: WHERE name = 'Joe'
+
 			break;
 
 			case 'notactive':
 				$this->db->select('id,usertype,isActive,created_at,updated_at,deleted_at');
+				$this->db->where('isActive', 0); // Produces: WHERE name = 'Joe'
+
 			break;
 
 			case 'deleted':
-				$this->db->select('id,usertype,isActive,created_at,updated_at,deleted_at');
+				$this->db->select('id,usertype,isActive,deleted_at');
+				$this->db->where('deleted_at IS NOT NULL'); // Produces: WHERE name = 'Joe'
+
 			break;
 
 			case 'fullinfo':
@@ -59,7 +65,7 @@ class Usertype_model extends MY_Model
 				$this->db->select('id,usertype,isActive,created_at,updated_at,deleted_at');
 			break;
 		}
-		
+
 		$query = $this->db->get('usertype');
 
 		if (count($query->result())) {

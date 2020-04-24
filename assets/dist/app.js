@@ -2017,15 +2017,22 @@ new Vue({
   el: '#app',
   data: {
     msg: 'hi from mssg',
-    a: 1
+    a: 1,
+    userTypes: null,
+    columns: null
   },
   methods: {
     showUserType: function showUserType(e) {
-      e.preventDefault(); // Make a request for a user with a given ID
+      e.preventDefault();
+      var listclass = Array.from(e.srcElement.parentElement.parentElement.children).forEach(function (item) {
+        item.children[0].classList.remove('bg-teal');
+      });
+      e.toElement.classList.add('bg-teal');
+      var that = this; // Make a request for a user with a given ID
 
-      axios.get('http://localhost/ciblog/usertype/ajaxindex/active').then(function (response) {
-        // handle success
-        console.log(response);
+      axios.get('http://localhost/ciblog/usertype/ajaxindex/' + e.target.innerText).then(function (response) {
+        that.columns = Object.keys(response.data[0]);
+        that.userTypes = response.data;
       })["catch"](function (error) {
         // handle error
         console.log(error);
@@ -2033,6 +2040,7 @@ new Vue({
       });
     }
   },
+  computed: {},
   created: function created() {
     // `this` points to the vm instance
     console.log('a is: ' + this.a);
