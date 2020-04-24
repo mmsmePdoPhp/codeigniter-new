@@ -48,6 +48,7 @@
 				"friendly-errors-webpack-plugin": "^1.6.1",
 				"fs-extra": "^7.0.1",
 				"glob": "^7.1.2",
+				"hover.css": "^2.3.2",
 				"html-loader": "^0.5.5",
 				"imagemin": "^6.0.0",
 				"img-loader": "^3.0.0",

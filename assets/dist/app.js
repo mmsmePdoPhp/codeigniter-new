@@ -2799,10 +2799,12 @@ new Vue({
                 that.userTypes = null;
                 listclass = Array.from(e.srcElement.parentElement.parentElement.children).forEach(function (item) {
                   item.children[0].classList.remove('bg-teal');
+                  item.children[0].classList.remove('hvr-wobble-vertical');
                 });
-                e.toElement.classList.add('bg-teal'); // Make a request for a user with a given ID
+                e.toElement.classList.add('bg-teal');
+                e.toElement.classList.add('hvr-wobble-vertical'); // Make a request for a user with a given ID
 
-                _context.next = 7;
+                _context.next = 8;
                 return axios.get('http://localhost/ciblog/usertype/ajaxindex/' + e.target.innerText).then(function (response) {
                   //if operation code was set add field edit for all user
                   that.userTypes = response.data;
@@ -2821,13 +2823,28 @@ new Vue({
                 })["finally"](function () {// always executed
                 });
 
-              case 7:
+              case 8:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
+    },
+    hoverUsertypeFilter: function hoverUsertypeFilter(e) {
+      var that = this;
+      e.preventDefault();
+      var listclass = Array.from(e.srcElement.parentElement.parentElement.children).forEach(function (item) {
+        item.children[0].classList.remove('btn-info');
+      });
+      e.toElement.classList.add('btn-info');
+    },
+    leftUsertypeFilter: function leftUsertypeFilter(e) {
+      var that = this;
+      e.preventDefault();
+      var listclass = Array.from(e.srcElement.parentElement.parentElement.children).forEach(function (item) {
+        item.children[0].classList.remove('btn-info');
+      });
     }
   },
   computed: {},

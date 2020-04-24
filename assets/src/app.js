@@ -20,9 +20,12 @@ new Vue({
 			that.userTypes=null;
 			let listclass=Array.from(e.srcElement.parentElement.parentElement.children).forEach(item => {
 				item.children[0].classList.remove('bg-teal')
+				item.children[0].classList.remove('hvr-wobble-vertical')
 			});
 			
 			e.toElement.classList.add('bg-teal')
+			e.toElement.classList.add('hvr-wobble-vertical')
+
 			// Make a request for a user with a given ID
 			await axios.get('http://localhost/ciblog/usertype/ajaxindex/'+e.target.innerText)
 				.then(function (response) {
@@ -46,6 +49,23 @@ new Vue({
 					// always executed
 				});
 
+		},
+		hoverUsertypeFilter(e){
+			let that = this;
+			e.preventDefault();
+			let listclass=Array.from(e.srcElement.parentElement.parentElement.children).forEach(item => {
+				item.children[0].classList.remove('btn-info')
+			});
+			
+			e.toElement.classList.add('btn-info')
+		},
+		leftUsertypeFilter(e){
+			let that = this;
+			e.preventDefault();
+			let listclass=Array.from(e.srcElement.parentElement.parentElement.children).forEach(item => {
+				item.children[0].classList.remove('btn-info')
+			});
+			
 		}
 	},
 	computed: {
