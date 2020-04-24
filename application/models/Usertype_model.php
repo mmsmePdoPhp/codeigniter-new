@@ -61,7 +61,10 @@ class Usertype_model extends MY_Model
 				$this->db->select('id,usertype,isActive,created_at,updated_at,deleted_at');
 			break;
 			
-			default:
+			default:case 'operation':
+				$this->db->select('id,usertype');
+			break;
+			
 				$this->db->select('id,usertype,isActive,created_at,updated_at,deleted_at');
 			break;
 		}

@@ -99,7 +99,11 @@ class Usertype extends MY_Controller
 
 				case 'fullinfo':
 					$response =  ($this->usertype_model->get_usertype($tag));
-					break;
+				break;
+
+				case 'operation':
+					$response =  ($this->usertype_model->get_usertype($tag));
+				break;
 			}
 
 			$this->output
@@ -168,4 +172,6 @@ class Usertype extends MY_Controller
 			}
 		}
 	}
+
+	
 }
