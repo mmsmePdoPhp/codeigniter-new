@@ -2778,12 +2778,17 @@ var axios = __webpack_require__(/*! ./../node_modules/axios/dist/axios */ "./nod
 new Vue({
   el: '#app',
   data: {
+    //start scope => usertype
+    //desc => get usertype with type atglance
     msg: 'hi from mssg',
     a: 1,
     userTypes: null,
-    columns: null
+    columns: null //end scope => usertype
+
   },
   methods: {
+    //start scope => usertype
+    //desc => get usertype with type atglance
     showUserType: function showUserType(e) {
       var _arguments = arguments,
           _this = this;
@@ -2859,13 +2864,15 @@ new Vue({
       var listclass = Array.from(e.srcElement.parentElement.parentElement.children).forEach(function (item) {
         item.children[0].classList.remove('btn-info');
       });
-    }
+    } //end scope => usertype
+
   },
   computed: {},
   mounted: function mounted() {
-    //get usertype with type atglance
+    //start scope => usertype
+    //desc => get usertype with type atglance
     this.showUserType(null, this.$refs.atglance.innerText);
-    this.$refs.atglance.classList.add('bg-teal');
+    this.$refs.atglance.classList.add('bg-teal'); //end scope => usertype
   }
 });
 

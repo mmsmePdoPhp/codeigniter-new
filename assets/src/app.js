@@ -7,12 +7,18 @@ const axios = require('./../node_modules/axios/dist/axios');
 new Vue({
 	el: '#app',
 	data: {
+		//start scope => usertype
+		//desc => get usertype with type atglance
 		msg: 'hi from mssg',
 		a: 1, 
 		userTypes:null,
 		columns:null
+		//end scope => usertype
+
 	},
 	methods: {
+		//start scope => usertype
+		//desc => get usertype with type atglance
 		async showUserType(e,tag=null) {
 			let that = this;
 			if(tag==null){
@@ -78,14 +84,19 @@ new Vue({
 			});
 			
 		}
+		//end scope => usertype
+
 	},
 	computed: {
 		
 	},
 	mounted: function () {
-		//get usertype with type atglance
+		//start scope => usertype
+		//desc => get usertype with type atglance
 		this.showUserType(null,this.$refs.atglance.innerText);
 		this.$refs.atglance.classList.add('bg-teal')
+		//end scope => usertype
+
 		
 	}
 })
