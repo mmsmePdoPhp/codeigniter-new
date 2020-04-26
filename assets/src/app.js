@@ -37,9 +37,9 @@ new Vue({
 			// Make a request for a user with a given ID
 			let url;
 			if(tag==null){
-				url = 'http://localhost/ciblog/usertype/ajaxindex/'+e.target.innerText
+				url = 'http://localhost/ciblog/group/ajaxindex/'+e.target.innerText
 			}else{
-				url = 'http://localhost/ciblog/usertype/ajaxindex/'+tag
+				url = 'http://localhost/ciblog/group/ajaxindex/'+tag
 			}
 			await axios.get(url)
 				.then(function (response) {
@@ -50,7 +50,6 @@ new Vue({
 							that.userTypes.map(item => {
 								item.edit = 'edit'
 							})
-							
 						}
 					}
 					

@@ -55,7 +55,7 @@ $route['blog-me/(:num)']= "blog/hi/$1";
 $route['usertype/index']= "usertype/index";
 $route['usertype/create']= "usertype/create";
 
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'auth/login';
 $route['(:any)'] = 'pages/view/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

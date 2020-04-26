@@ -2816,9 +2816,9 @@ new Vue({
 
 
                 if (tag == null) {
-                  url = 'http://localhost/ciblog/usertype/ajaxindex/' + e.target.innerText;
+                  url = 'http://localhost/ciblog/group/ajaxindex/' + e.target.innerText;
                 } else {
-                  url = 'http://localhost/ciblog/usertype/ajaxindex/' + tag;
+                  url = 'http://localhost/ciblog/group/ajaxindex/' + tag;
                 }
 
                 _context.next = 6;
