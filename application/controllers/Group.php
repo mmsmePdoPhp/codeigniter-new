@@ -8,10 +8,8 @@ class Group extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->model('group_model');
-		$this->load->helper('url_helper');
-		$this->load->library('session');
-		$this->load->library('form_validation');
-		$this->load->helper('url');
+		$this->load->library(['ion_auth','session', 'form_validation']);
+		$this->load->helper(['url','url_helper', 'language']);
 
 	}
 

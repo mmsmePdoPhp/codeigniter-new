@@ -5,9 +5,18 @@ class MY_Controller extends CI_Controller {
 
 	public function __construct()
 	{
+		
 		parent::__construct();
-		// $this->load->model('news_model');	
-		$this->load->helper('url_helper');
+		$this->load->database();
+		$this->load->helper(['url','url_helper', 'language']);
+		$this->load->library(['ion_auth','session', 'form_validation']);
+
+		if (!$this->ion_auth->is_admin())
+		{
+		  $this->session->set_flashdata('message', 'You must be an admin to view this page');
+		  redirect('/');
+		}
+
 	}
 
 
