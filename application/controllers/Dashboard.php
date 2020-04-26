@@ -15,7 +15,10 @@ class Dashboard extends MY_Controller {
 	 */
 	public function index()
 	{
-		$this->loadview([]);
+		
+		$this->loadhead();
+		$this->load->view('dashboard/dashboard');
+		$this->loaddown();
 		
 	}
 

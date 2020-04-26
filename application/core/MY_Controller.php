@@ -10,23 +10,42 @@ class MY_Controller extends CI_Controller {
 		$this->load->helper('url_helper');
 	}
 
+
 	/**
- 	* load views with header and footer
+	 * load views with header and footer
+	 *
+	 * main order for loading pages
+	 * 1.header
+	 * 2.navbar
+	 * 3.aside
+	 * 4.content-wrapper
+	 * 5.aside.control-sidebar
+	 * 6.footer
+	 * 
+	 * 
+	 * 
 	*/
 	public function loadhead($home=false){
-        //default
-        $this->load->view('templates/header');
+        //1.header
+		$this->load->view('templates/header');
+		
+		// 2.navbar
 		$this->load->view('templates/navbar');
 
-        if ($home===true) {
-            $this->load->view('dashboard/dashboard');
-        }
-	}
-	public function loaddown($home=false){
-		//default
+		// 3.aside
 		$this->load->view('templates/rightsidebar');
 
-		//default
+		//4.contnent
+        if ($home===true) {
+            $this->load->view('dashboard/dashboard');
+		}
+		
+		//or 4.content
+	}
+	public function loaddown($home=false){
+		//5.controll-sidebar
+
+		// 6.footer
 		$this->load->view('templates/footer');
 
 	}

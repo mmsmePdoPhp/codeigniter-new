@@ -50,11 +50,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-// myself routes
+// route for dashboard
+$route['dashboard']= "dashboard/index";
+
+
+//route for blog
 $route['blog-me/(:num)']= "blog/hi/$1";
+
+
+//routes of userType
 $route['usertype/index']= "usertype/index";
 $route['usertype/create']= "usertype/create";
 
+// default routes
 $route['default_controller'] = 'auth/login';
 $route['(:any)'] = 'pages/view/$1';
 $route['404_override'] = '';
