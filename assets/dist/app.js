@@ -2758,6 +2758,32 @@ try {
 /*!********************!*\
   !*** ./src/app.js ***!
   \********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// import all require packages
+__webpack_require__(/*! ./components/group */ "./src/components/group.js"); //vue scripts for group page
+
+
+__webpack_require__(/*! ./components/table */ "./src/components/table.js"); //default script for table for users page
+
+/***/ }),
+
+/***/ "./src/app.scss":
+/*!**********************!*\
+  !*** ./src/app.scss ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./src/components/group.js":
+/*!*********************************!*\
+  !*** ./src/components/group.js ***!
+  \*********************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2771,8 +2797,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-// import all require packages
-var axios = __webpack_require__(/*! ./../node_modules/axios/dist/axios */ "./node_modules/axios/dist/axios.js"); //  my codes
+var axios = __webpack_require__(/*! ./../../node_modules/axios/dist/axios */ "./node_modules/axios/dist/axios.js"); //  codes for manage and manupulate group pages entity
 
 
 new Vue({
@@ -2878,14 +2903,29 @@ new Vue({
 
 /***/ }),
 
-/***/ "./src/app.scss":
-/*!**********************!*\
-  !*** ./src/app.scss ***!
-  \**********************/
+/***/ "./src/components/table.js":
+/*!*********************************!*\
+  !*** ./src/components/table.js ***!
+  \*********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+//  script just for show table users
+$(function () {
+  $("#example1").DataTable({
+    "responsive": true,
+    "autoWidth": false
+  });
+  $('#example2').DataTable({
+    "paging": true,
+    "lengthChange": false,
+    "searching": false,
+    "ordering": true,
+    "info": true,
+    "autoWidth": false,
+    "responsive": true
+  });
+});
 
 /***/ }),
 

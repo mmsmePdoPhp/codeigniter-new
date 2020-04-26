@@ -7,12 +7,25 @@ class Users extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('usertype_model');
-		$this->load->helper('url_helper');
-		$this->load->library('session');
-		$this->load->library('form_validation');
-		$this->load->helper('url');
+		$this->load->model('users_model');
+		$this->load->library('pagination');
 
+	}
+
+	public function index($perPage=0){
+	echo $perPage;
+
+	$config['base_url'] = base_url().'/users/index';
+	$config['total_rows'] = 200;
+	$config['per_page'] = 20;
+
+	$this->pagination->initialize($config);
+
+	$data['links'] =  $this->pagination->create_links();
+
+		$this->loadhead();
+		$this->load->view('dashboard/users/index',$data);
+		$this->loaddown();
 	}
 
 	/**
@@ -21,7 +34,7 @@ class Users extends MY_Controller
 	 * active
 	 * 
 	 */
-	public function index(String $tag = 'atglance')
+	public function indexs(String $tag = 'atglance')
 	{
 		$tag = trim($tag);
 
