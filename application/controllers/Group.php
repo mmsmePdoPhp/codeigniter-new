@@ -57,8 +57,13 @@ class Group extends MY_Controller
 
 			$data['columns'] = ($this->db->list_fields('groups'));
 		} else {
-			echo 'false';
-		}
+            echo 'false';
+        }
+
+		//send filename script
+		$data['fileName'] = 'group';
+
+		//load files
 		$this->loadhead();
 		$this->load->view('dashboard/groups/index', $data);
 		$this->loaddown();

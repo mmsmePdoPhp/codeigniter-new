@@ -13,23 +13,40 @@ class Users extends MY_Controller
 	}
 
 	public function index($perPage=0){
-	echo $perPage;
+		echo $perPage;
 
-	$config['base_url'] = base_url().'/users/index';
-	$config['total_rows'] = 200;
-	$config['per_page'] = 20;
+		//get informations from users table
 
-	$this->pagination->initialize($config);
 
-	$data['links'] =  $this->pagination->create_links();
+		// all staff for pagination page
+		$config['base_url'] = base_url().'/users/index';
+		$config['total_rows'] = 200;
+		$config['per_page'] = 20;
+		$config['attributes'] = array('class' => 'btn text-light  hvr-bounce-out bg-custome');
+		$config['cur_tag_open'] ='<b class="btn bg-olive  hvr-bounce-out">';
+		$config['cur_tag_close'] = '</b>';
+		$config['num_tag_open'] = '<span>';
+		$config['num_tag_close'] = '<span>';
+		$config['num_links'] = 1;
+		$config['uri_segment'] = 3;
+		$config['next_tag_open'] = '<span  >';
+		$config['prev_link'] = 'prev';
+		$config['next_link'] = 'next';
+		$config['next_tag_close'] = '</span>';
 
+		$this->pagination->initialize($config);
+
+		$data['links'] =  $this->pagination->create_links();
+
+		//send file name script to load
+		$data['fileName'] = 'users';
 		$this->loadhead();
 		$this->load->view('dashboard/users/index',$data);
 		$this->loaddown();
 	}
 
 	/**
-	 * get and show all usertypes
+	 * get and show all userss
 	 * atgrance
 	 * active
 	 * 
@@ -50,32 +67,32 @@ class Users extends MY_Controller
 			// $this->dd($this->input->get(null,true));
 			switch ($tag) {
 				case 'atglance':
-					$data['usertypes'] = ($this->usertype_model->get_usertype($tag));
+					$data['userss'] = ($this->users_model->get_users($tag));
 					break;
 
 				case 'active':
-					$data['usertypes'] = ($this->usertype_model->get_usertype($tag));
+					$data['userss'] = ($this->users_model->get_users($tag));
 					break;
 
 				case 'notactive':
-					$data['usertypes'] = ($this->usertype_model->get_usertype($tag));
+					$data['userss'] = ($this->users_model->get_users($tag));
 					break;
 
 				case 'deleted':
-					$data['usertypes'] = ($this->usertype_model->get_usertype($tag));
+					$data['userss'] = ($this->users_model->get_users($tag));
 					break;
 
 				case 'fullinfo':
-					$data['usertypes'] = ($this->usertype_model->get_usertype($tag));
+					$data['userss'] = ($this->users_model->get_users($tag));
 					break;
 			}
 
-			$data['columns'] = ($this->db->list_fields('usertype'));
+			$data['columns'] = ($this->db->list_fields('users'));
 		} else {
 			echo 'false';
 		}
 		$this->loadhead();
-		$this->load->view('dashboard/usertype/index', $data);
+		$this->load->view('dashboard/users/index', $data);
 		$this->loaddown();
 	}
 	public function ajaxindex(String $tag = 'atglance')
@@ -94,30 +111,28 @@ class Users extends MY_Controller
 			// $this->dd($this->input->get(null,true));
 			switch ($tag) {
 				case 'atglance':
-					$response =  ($this->usertype_model->get_usertype($tag));
+					($response =  ($this->users_model->get_users($tag)));
 					break;
 
 				case 'active':
-					$response =  ($this->usertype_model->get_usertype($tag));
+					$response =  ($this->users_model->get_users($tag));
 					// $response = array('status' => 'OK');
-
-					
 					break;
 
 				case 'notactive':
-					$response =  ($this->usertype_model->get_usertype($tag));
+					$response =  ($this->users_model->get_users($tag));
 					break;
 
 				case 'deleted':
-					$response =  ($this->usertype_model->get_usertype($tag));
+					$response =  ($this->users_model->get_users($tag));
 					break;
 
 				case 'fullinfo':
-					$response =  ($this->usertype_model->get_usertype($tag));
+					$response =  ($this->users_model->get_users($tag));
 				break;
 
 				case 'operation':
-					$response =  ($this->usertype_model->get_usertype($tag));
+					$response =  ($this->users_model->get_users($tag));
 				break;
 			}
 
@@ -132,7 +147,7 @@ class Users extends MY_Controller
 		}
 	}
 	/**
-	 * get and show all usertypes
+	 * get and show all userss
 	 */
 	public function create()
 	{
@@ -141,7 +156,7 @@ class Users extends MY_Controller
 		$this->load->library('form_validation');
 
 		$this->loadhead();
-		$this->load->view('dashboard/usertype/create');
+		$this->load->view('dashboard/users/create');
 		$this->loaddown();
 	}
 
@@ -163,33 +178,33 @@ class Users extends MY_Controller
 
         //filter length is not greter than 12
         if ($numeric == true && $notNumeric == false) {
-            if (($this->usertype_model->get_usertype_byId($tag))) {
-                //data retured and i.e usertype is exist in table
-                $data['usertype'] = ($this->usertype_model->get_usertype_byId($tag));
+            if (($this->users_model->get_users_byId($tag))) {
+                //data retured and i.e users is exist in table
+                $data['users'] = ($this->users_model->get_users_byId($tag));
             } else {
                 //if not exist redirect back
-				redirect('/usertype/index', 'refresh');
+				redirect('/users/index', 'refresh');
             }
         } else {
             echo 'false';
         }
         $this->loadhead();
-        $this->load->view('dashboard/usertype/edit', $data);
+        $this->load->view('dashboard/users/edit', $data);
         $this->loaddown();
     }
     
 
 	/**
-	 * store information new usertype
+	 * store information new users
 	 */
 	public function store()
 	{
 
 
 		$this->form_validation->set_rules(
-			'usertype',
-			'usertype',
-			'required|min_length[5]|max_length[22]|is_unique[usertype.userType]',
+			'users',
+			'users',
+			'required|min_length[5]|max_length[22]|is_unique[users.users]',
 			array(
 				'required'      => 'You have not provided %s.',
 				'is_unique'     => 'This %s already exists.'
@@ -198,24 +213,24 @@ class Users extends MY_Controller
 
 		if ($this->form_validation->run() === FALSE) {
 			$this->loadhead();
-			$this->load->view('dashboard/usertype/create');
+			$this->load->view('dashboard/users/create');
 			$this->loaddown();
 		} else {
-			if ($this->usertype_model->set_usertype()) {
+			if ($this->users_model->set_users()) {
 				//insert success
 
 				//flash session
-				$this->session->set_flashdata('insert_success', 'UserType was successfully created!');
+				$this->session->set_flashdata('insert_success', 'users was successfully created!');
 
 				$this->loadhead();
-				$this->load->view('dashboard/usertype/index');
+				$this->load->view('dashboard/users/index');
 				$this->loaddown();
 			} else {
 				//show error 
 				log_message('error', 'Some variable did not contain a value.');
-				//redirect to create usertype
+				//redirect to create users
 				$this->loadhead();
-				$this->load->view('dashboard/usertype/create');
+				$this->load->view('dashboard/users/create');
 				$this->loaddown();
 			}
 		}
@@ -224,8 +239,8 @@ class Users extends MY_Controller
 	public function update()
 	{
 		$this->form_validation->set_rules(
-			'usertype',
-			'usertype',
+			'users',
+			'users',
 			'required|min_length[5]|max_length[22]',
 			array(
 				'required'      => 'You have not provided %s.',
@@ -244,23 +259,23 @@ class Users extends MY_Controller
 
 		if ($this->form_validation->run() === FALSE) {
 			$this->loadhead();
-			$this->load->view('dashboard/usertype/create');
+			$this->load->view('dashboard/users/create');
 			$this->loaddown();
 		} else {
-			if ($this->usertype_model->update_usertype()) {
+			if ($this->users_model->update_users()) {
 				//insert success
 
 				//flash session
-				$this->session->set_flashdata('insert_success', 'UserType was successfully updated!');
+				$this->session->set_flashdata('insert_success', 'users was successfully updated!');
 
-				redirect('/usertype/index', 'refresh');
+				redirect('/users/index', 'refresh');
 
 			} else {
 				//set flahMessage 
-				$this->session->set_flashdata('insert_error', 'UserType wasn`t updated!');
+				$this->session->set_flashdata('insert_error', 'users wasn`t updated!');
 
-				//redirect to create usertype
-				redirect('/usertype/edit/'.$this->input->post('id'), 'refresh');
+				//redirect to create users
+				redirect('/users/edit/'.$this->input->post('id'), 'refresh');
 
 			}
 		}

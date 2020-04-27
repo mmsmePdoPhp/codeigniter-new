@@ -9,15 +9,19 @@ new Vue({
 		msg: 'hi from mssg',
 		a: 1, 
 		userTypes:null,
-		columns:null
+		columns:null,
 		//end scope => usertype
+
+		isResponsiveTable:false
 
 	},
 	methods: {
 		//start scope => usertype
 		//desc => get usertype with type atglance
-		async showUserType(e,tag=null) {
+		async showUserType(e,tag=null) 
+		{
 			let that = this;
+			that.isResponsiveTable=false;
 			if(tag==null){
 				e.preventDefault();
 				//clearn data
@@ -34,19 +38,24 @@ new Vue({
 			// Make a request for a user with a given ID
 			let url;
 			if(tag==null){
-				url = 'http://localhost/ciblog/group/ajaxindex/'+e.target.innerText
+				url = 'http://localhost/ciblog/users/ajaxindex/'+e.target.innerText
 			}else{
-				url = 'http://localhost/ciblog/group/ajaxindex/'+tag
+				url = 'http://localhost/ciblog/users/ajaxindex/'+tag
 			}
 			await axios.get(url)
 				.then(function (response) {
 					//if operation code was set add field edit for all user
 					that.userTypes= response.data;
+					console.log(response.data)
 					if(tag==null){
 						if(e.target.innerText=='operation'){
 							that.userTypes.map(item => {
 								item.edit = 'edit'
 							})
+						}else if(e.target.innerText=='fullinfo'){
+							that.isResponsiveTable=true;
+						}else{
+
 						}
 					}
 					
@@ -92,7 +101,6 @@ new Vue({
 		this.showUserType(null,this.$refs.atglance.innerText);
 		this.$refs.atglance.classList.add('bg-teal')
 		//end scope => usertype
-
 		
 	}
 })

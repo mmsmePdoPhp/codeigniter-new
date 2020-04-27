@@ -31,17 +31,26 @@
   <!-- AdminLTE -->
   <script src="<?php echo base_url(); ?>assets/thdist/js/adminlte.js"></script>
 <!-- DataTables -->
-<script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- <script src="<?php //echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php //echo base_url(); ?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?php //echo base_url(); ?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?php //echo base_url(); ?>assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script> -->
   <!-- OPTIONAL SCRIPTS -->
   <script src="<?php echo base_url(); ?>assets/plugins/chart.js/Chart.min.js"></script>
-  <!-- <script src="<?php echo base_url(); ?>assets/thdist/js/demo.js"></script> -->
+  <!-- <script src="<?php //echo base_url(); ?>assets/thdist/js/demo.js"></script> -->
 	<script src="<?php echo base_url(); ?>assets/thdist/js/pages/dashboard3.js"></script>
 	
 	<!-- custome script -->
-  <script src="<?php echo base_url(); ?>assets/dist/app.js"></script>
+	<script src="<?php echo base_url(); ?>assets/dist/app.js"></script>
+	
+	<!-- add individual file group.js -->
+	<?php
+	//using function
+	 loadScriptFile($fileName);
+	?>
+
+
+
 </body>
 </body>
 </html>

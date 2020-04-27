@@ -57,7 +57,12 @@ class Users_model extends MY_Model
 	{
 		switch ($tag) {
 			case 'atglance':
-				$this->db->select('id,users,isActive,created_at');
+				$this->db->select('users.id,users.first_name,users.last_name,users.username,users.email,groups.name');
+				// $this->db->select('*');
+				$this->db->from('users');
+				$this->db->join('users_groups', 'users.id = users_groups.user_id', 'inner');
+				$this->db->join('groups', 'users_groups.group_id = groups.id', 'inner');
+				// $this->dd($query = $this->db->get()->result());
 			break;
 
 			case 'active':
@@ -73,28 +78,39 @@ class Users_model extends MY_Model
 			break;
 
 			case 'deleted':
-				$this->db->select('id,users,isActive,deleted_at');
-				$this->db->where('deleted_at IS NOT NULL'); // Produces: WHERE name = 'Joe'
+				$this->db->select('users.id,users.first_name,users.last_name,users.username,users.email,groups.name');
+				$this->db->where('active IS  NULL'); // Produces: WHERE name = 'Joe'
+				// $this->db->select('*');
+				$this->db->from('users');
+				$this->db->join('users_groups', 'users.id = users_groups.user_id', 'inner');
+				$this->db->join('groups', 'users_groups.group_id = groups.id', 'inner');
 
 			break;
 
 			case 'fullinfo':
-				$this->db->select('id,users,isActive,created_at,updated_at,deleted_at');
+				$this->db->select('*');
+				$this->db->from('users');
+				$this->db->join('users_groups', 'users.id = users_groups.user_id', 'inner');
+				$this->db->join('groups', 'users_groups.group_id = groups.id', 'inner');
 			break;
 			
 			default:case 'operation':
-				$this->db->select('id,users');
+				$this->db->select('users.id,users.first_name,users.last_name,users.username,users.email,groups.name');
+				// $this->db->select('*');
+				$this->db->from('users');
+				$this->db->join('users_groups', 'users.id = users_groups.user_id', 'inner');
+				$this->db->join('groups', 'users_groups.group_id = groups.id', 'inner');			
 			break;
 			
-				$this->db->select('id,users,isActive,created_at,updated_at,deleted_at');
-			break;
+				
 		}
 
-		$query = $this->db->get('users');
+		$query = $this->db->get();
 
 		if (count($query->result())) {
 			//show information
-			return $query->result();
+			// return $this->dd($query->result());
+			return ($query->result());
 		} else {
 			//return false for controll logic
 			return false;
