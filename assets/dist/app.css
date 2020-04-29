@@ -4253,3 +4253,14 @@
   background-color: #4d247c !important;
 }
 
+.text-inputs-orange {
+  background: #cd3ffb;
+  background: radial-gradient(circle, #cd3ffb 0%, #4199db 23%, #4b7df0 95%, #fc466b 100%);
+}
+
+.text-inputs-orange input {
+  color: brown !important;
+  font-weight: bold;
+  font-style: italic;
+}
+

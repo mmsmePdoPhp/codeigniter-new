@@ -66,14 +66,22 @@ class Users_model extends MY_Model
 			break;
 
 			case 'active':
-				$this->db->select('id,users,isActive,created_at,updated_at,deleted_at');
-				$this->db->where('isActive', 1); // Produces: WHERE name = 'Joe'
+				$this->db->select('users.id,users.first_name,users.last_name,users.username,users.email,groups.name');
+				$this->db->where('isActive',1); // Produces: WHERE name = 'Joe'
+				// $this->db->select('*');
+				$this->db->from('users');
+				$this->db->join('users_groups', 'users.id = users_groups.user_id', 'inner');
+				$this->db->join('groups', 'users_groups.group_id = groups.id', 'inner');
 
 			break;
 
 			case 'notactive':
-				$this->db->select('id,users,isActive,created_at,updated_at,deleted_at');
-				$this->db->where('isActive', 0); // Produces: WHERE name = 'Joe'
+				$this->db->select('users.id,users.first_name,users.last_name,users.username,users.email,groups.name');
+				$this->db->where('isActive', 'Null'); // Produces: WHERE name = 'Joe'
+				// $this->db->select('*');
+				$this->db->from('users');
+				$this->db->join('users_groups', 'users.id = users_groups.user_id', 'inner');
+				$this->db->join('groups', 'users_groups.group_id = groups.id', 'inner');
 
 			break;
 

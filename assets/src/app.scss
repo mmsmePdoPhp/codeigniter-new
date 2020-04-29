@@ -3,3 +3,13 @@
 .bg-custome{
 	background-color: rgb(77, 36, 124) !important;
 }
+
+.text-inputs-orange{
+	background: rgb(205,63,251);
+background: radial-gradient(circle, rgba(205,63,251,1) 0%, rgba(65,153,219,1) 23%, rgb(75, 125, 240) 95%, rgba(252,70,107,1) 100%);
+		input{
+		color:brown !important;
+		font-weight: bold;
+		font-style: italic;
+	}
+}
