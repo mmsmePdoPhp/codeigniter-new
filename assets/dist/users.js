@@ -2808,7 +2808,6 @@ new Vue({
                 that.currentRow = 0;
                 that.isResponsiveTable = false;
                 that.userTypes = null;
-                alert(e.target.innerText);
 
                 if (tag == null) {
                   e.preventDefault();
@@ -2838,7 +2837,7 @@ new Vue({
 
 
                 url += '/' + page;
-                _context.next = 12;
+                _context.next = 11;
                 return axios.get(url).then(function (response) {
                   //if operation code was set add field edit for all user
                   that.userTypes = response.data;
@@ -2846,8 +2845,6 @@ new Vue({
 
                   if (tag == null) {
                     if (e.target.innerText == 'operation') {
-                      alert('operation edit');
-                      console.log(response.data);
                       that.userTypes.map(function (item) {
                         item.edit = 'edit';
                       });
@@ -2864,7 +2861,7 @@ new Vue({
                 })["finally"](function () {// always executed
                 });
 
-              case 12:
+              case 11:
               case "end":
                 return _context.stop();
             }
@@ -2929,6 +2926,8 @@ new Vue({
                 _context2.next = 13;
                 return axios.get(url).then(function (response) {
                   //if operation code was set add field edit for all user
+                  that.rowCounts = Math.ceil(response.data.count / 10);
+                  response.data.pop();
                   that.userTypes = response.data;
 
                   if (that.tag == 'operation') {
@@ -2937,9 +2936,8 @@ new Vue({
                     });
                   } else if (that.tag == 'fullinfo') {
                     that.isResponsiveTable = true;
-                  } else {}
+                  } else {} //get all column value
 
-                  that.rowCounts = Math.ceil(response.data.count / 10); //get all column value
 
                   that.columns = Object.keys(that.userTypes[0]);
                 })["catch"](function (error) {

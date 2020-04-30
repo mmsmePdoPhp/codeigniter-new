@@ -13,7 +13,6 @@ class Users extends MY_Controller
 	}
 
 	public function index($perPage=0){
-		echo $perPage . '<br>';
 		// echo ($this->users_model->get_users('atglance',$perPage));
 		// $this->dd($this->users_model->get_users('atglance',$perPage));
 		//get informations from users table

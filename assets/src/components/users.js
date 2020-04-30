@@ -28,7 +28,6 @@ new Vue({
 			that.isResponsiveTable=false;
 			that.userTypes=null;
 
-			alert(e.target.innerText)
 			if(tag==null){
 				e.preventDefault();
 				if(e.target.innerText != that.tag){
@@ -66,8 +65,6 @@ new Vue({
 
 					if(tag==null){
 						if(e.target.innerText=='operation'){
-							alert('operation edit')
-							console.log(response.data)
 							that.userTypes.map(item => {
 								item.edit = 'edit'
 							})
@@ -154,7 +151,10 @@ new Vue({
 			await axios.get(url)
 				.then(function (response) {
 					//if operation code was set add field edit for all user
+					that.rowCounts=(Math.ceil(((response.data.count)/10)));
+					response.data.pop();
 					that.userTypes= response.data;
+					
 
 					if(that.tag=='operation'){
 						that.userTypes.map(item => {
@@ -166,7 +166,6 @@ new Vue({
 
 					}
 					
-					that.rowCounts=(Math.ceil(((response.data.count)/10)));
 					
 					//get all column value
 					that.columns = Object.keys(that.userTypes[0])
