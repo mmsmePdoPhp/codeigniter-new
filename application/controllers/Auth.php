@@ -21,6 +21,31 @@ class Auth extends CI_Controller
 		$this->lang->load('auth');
 	}
 
+	public function loadhead($home=false){
+        //1.header
+		$this->load->view('templates/header');
+		
+		// 2.navbar
+		$this->load->view('templates/navbar');
+
+		// 3.aside
+		$this->load->view('templates/rightsidebar');
+
+		//4.contnent
+        if ($home===true) {
+            $this->load->view('dashboard/dashboard');
+		}
+		
+		//or 4.content
+	}
+	public function loaddown($home=false){
+		//5.controll-sidebar
+
+		// 6.footer
+		$this->load->view('templates/footer');
+
+	}
+
 	/**
 	 * Redirect if needed, otherwise display the user list
 	 */
@@ -465,6 +490,8 @@ class Auth extends CI_Controller
 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
+			echo 'yes;';
+			return;
 			redirect('auth', 'refresh');
 		}
 
@@ -473,21 +500,21 @@ class Auth extends CI_Controller
 		$this->data['identity_column'] = $identity_column;
 
 		// validate form input
-		$this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'trim|required');
-		$this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'trim|required');
+		$this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'trim|required|min_length[5]|max_length[22]');
+		$this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'trim|required|min_length[5]|max_length[22]');
 		if ($identity_column !== 'email')
 		{
 			$this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'trim|required|is_unique[' . $tables['users'] . '.' . $identity_column . ']');
-			$this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'trim|required|valid_email');
+			$this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'trim|required|valid_email|min_length[5]|max_length[22]');
 		}
 		else
 		{
-			$this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'trim|required|valid_email|is_unique[' . $tables['users'] . '.email]');
+			$this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'trim|required|min_length[15]|max_length[35]|valid_email|is_unique[' . $tables['users'] . '.email]');
 		}
-		$this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim');
-		$this->form_validation->set_rules('company', $this->lang->line('create_user_validation_company_label'), 'trim');
+		$this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim|required|numeric|integer|is_natural|min_length[11]|max_length[11]');
+		$this->form_validation->set_rules('company', $this->lang->line('create_user_validation_company_label'), 'trim|required|min_length[3]|max_length[15]');
 		$this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|matches[password_confirm]');
-		$this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
+		$this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required|min_length[8]|max_length[35]');
 
 		if ($this->form_validation->run() === TRUE)
 		{
@@ -564,7 +591,9 @@ class Auth extends CI_Controller
 				'value' => $this->form_validation->set_value('password_confirm'),
 			];
 
+			$this->loadhead();
 			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'create_user', $this->data);
+			$this->loaddown();
 		}
 	}
 	/**

@@ -59,8 +59,9 @@ $route['blog-me/(:num)']= "blog/hi/$1";
 
 
 //routes of userType
-$route['usertype/index']= "usertype/index";
-$route['usertype/create']= "usertype/create";
+$route['users/index']= "users/index";
+$route['users/ajaxindex/(:any)/(:num)']= "users/ajaxindex/$1/$2";
+$route['users/create']= "users/create";
 
 // default routes
 $route['default_controller'] = 'auth/login';

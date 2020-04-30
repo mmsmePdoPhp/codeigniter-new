@@ -13,33 +13,34 @@ class Users extends MY_Controller
 	}
 
 	public function index($perPage=0){
-		echo $perPage;
-
+		echo $perPage . '<br>';
+		// echo ($this->users_model->get_users('atglance',$perPage));
+		// $this->dd($this->users_model->get_users('atglance',$perPage));
 		//get informations from users table
 
-
 		// all staff for pagination page
-		$config['base_url'] = base_url().'/users/index';
-		$config['total_rows'] = 200;
-		$config['per_page'] = 20;
-		$config['attributes'] = array('class' => 'btn text-light  hvr-bounce-out bg-custome');
-		$config['cur_tag_open'] ='<b class="btn bg-olive  hvr-bounce-out">';
-		$config['cur_tag_close'] = '</b>';
-		$config['num_tag_open'] = '<span>';
-		$config['num_tag_close'] = '<span>';
-		$config['num_links'] = 1;
-		$config['uri_segment'] = 3;
-		$config['next_tag_open'] = '<span  >';
-		$config['prev_link'] = 'prev';
-		$config['next_link'] = 'next';
-		$config['next_tag_close'] = '</span>';
+		// $config['base_url'] = base_url().'/users/index';
+		// $config['total_rows'] = 200;
+		// $config['per_page'] = 10;
+		// $config['attributes'] = array('class' => 'btn text-light  hvr-bounce-out bg-custome');
+		// $config['cur_tag_open'] ='<b class="btn bg-olive  hvr-bounce-out" >';
+		// $config['cur_tag_close'] = '</b>';
+		// $config['num_tag_open'] = '<span>';
+		// $config['num_tag_close'] = '<span>';
+		// $config['num_links'] = 1;
+		// $config['uri_segment'] = 3;
+		// $config['next_tag_open'] = '<span  >';
+		// $config['prev_link'] = 'prev';
+		// $config['next_link'] = 'next';
+		// $config['next_tag_close'] = '</span>';
 
-		$this->pagination->initialize($config);
+		// $this->pagination->initialize($config);
 
-		$data['links'] =  $this->pagination->create_links();
+		// $data['links'] =  $this->pagination->create_links();
 
 		//send file name script to load
 		$data['fileName'] = 'users';
+
 		$this->loadhead();
 		$this->load->view('dashboard/users/index',$data);
 		$this->loaddown();
@@ -95,7 +96,7 @@ class Users extends MY_Controller
 		$this->load->view('dashboard/users/index', $data);
 		$this->loaddown();
 	}
-	public function ajaxindex(String $tag = 'atglance')
+	public function ajaxindex(String $tag = 'atglance',$perPage=0)
 	{
 		$tag = trim($tag);
 
@@ -111,28 +112,28 @@ class Users extends MY_Controller
 			// $this->dd($this->input->get(null,true));
 			switch ($tag) {
 				case 'atglance':
-					($response =  ($this->users_model->get_users($tag)));
+					($response =  ($this->users_model->get_users($tag, $perPage)));
 					break;
 
 				case 'active':
-					$response =  ($this->users_model->get_users($tag));
+					$response =  ($this->users_model->get_users($tag, $perPage));
 					// $response = array('status' => 'OK');
 					break;
 
 				case 'notactive':
-					$response =  ($this->users_model->get_users($tag));
+					$response =  ($this->users_model->get_users($tag, $perPage));
 					break;
 
 				case 'deleted':
-					$response =  ($this->users_model->get_users($tag));
+					$response =  ($this->users_model->get_users($tag, $perPage));
 					break;
 
 				case 'fullinfo':
-					$response =  ($this->users_model->get_users($tag));
+					$response =  ($this->users_model->get_users($tag, $perPage));
 				break;
 
 				case 'operation':
-					$response =  ($this->users_model->get_users($tag));
+					$response =  ($this->users_model->get_users($tag, $perPage));
 				break;
 			}
 
@@ -202,14 +203,77 @@ class Users extends MY_Controller
 
 
 		$this->form_validation->set_rules(
-			'users',
-			'users',
-			'required|min_length[5]|max_length[22]|is_unique[users.users]',
+			'first_name',
+			'FirstName',
+			'required|min_length[5]|max_length[22]',
 			array(
 				'required'      => 'You have not provided %s.',
 				'is_unique'     => 'This %s already exists.'
 			)
 		);
+
+		$this->form_validation->set_rules(
+			'last_name',
+			'LastName',
+			'required|min_length[5]|max_length[22]',
+			array(
+				'required'      => 'You have not provided %s.',
+				'is_unique'     => 'This %s already exists.'
+			)
+		);
+		$this->form_validation->set_rules(
+			'username',
+			'username',
+			'required|min_length[5]|max_length[22]',
+			array(
+				'required'      => 'You have not provided %s.',
+				'is_unique'     => 'This %s already exists.'
+			)
+		);
+		$this->form_validation->set_rules(
+			'email',
+			'email',
+			'required|valid_email|min_length[5]|max_length[40]|is_unique[users.email]',
+			array(
+				'required'      => 'You have not provided %s.',
+				'is_unique'     => 'This %s already exists.'
+			)
+		);
+		$this->form_validation->set_rules(
+			'isActive',
+			'isActive',
+			'max_length[22]',
+			array(
+				'required'      => 'You have not provided %s.',
+			)
+		);
+		
+		$this->form_validation->set_rules( //+98 933 848 22 93
+			'phone',
+			'Phone',
+			'required|numeric|integer|is_natural|min_length[11]|max_length[11]',
+			array(
+				'required'      => 'You have not provided %s.',
+			)
+		);
+
+		$this->form_validation->set_rules(
+			'password',
+			'password',
+			'required|min_length[8]|max_length[25]',
+			array(
+				'required'      => 'You have not provided %s.',
+			)
+		);
+		$this->form_validation->set_rules(
+			'passconf',
+			'Password Confirmation',
+			'required|min_length[8]|max_length[25]|matches[password]',
+			array(
+				'required'      => 'You have not provided %s.',
+			)
+		);
+
 
 		if ($this->form_validation->run() === FALSE) {
 			$this->loadhead();

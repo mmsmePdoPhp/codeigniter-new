@@ -46,7 +46,9 @@
 	<!-- add individual file group.js -->
 	<?php
 	//using function
-	 loadScriptFile($fileName);
+	if(isset($fileName)){
+		loadScriptFile($fileName);
+	}
 	?>
 
 

@@ -2781,9 +2781,12 @@ new Vue({
     //desc => get usertype with type atglance
     msg: 'hi from mssg',
     a: 1,
+    tag: 'atglance',
     userTypes: null,
     columns: null,
     //end scope => usertype
+    rowCounts: 0,
+    currentRow: 0,
     isResponsiveTable: false
   },
   methods: {
@@ -2794,17 +2797,27 @@ new Vue({
           _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var tag, that, listclass, url;
+        var tag, page, that, listclass, url;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 tag = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : null;
+                page = _arguments.length > 2 && _arguments[2] !== undefined ? _arguments[2] : 0;
                 that = _this;
+                that.currentRow = 0;
                 that.isResponsiveTable = false;
+                that.userTypes = null;
+                alert(e.target.innerText);
 
                 if (tag == null) {
-                  e.preventDefault(); //clearn data
+                  e.preventDefault();
+
+                  if (e.target.innerText != that.tag) {
+                    that.tag = e.target.innerText;
+                  } //default pages option
+                  //clearn data
+
 
                   that.userTypes = null;
                   listclass = Array.from(e.srcElement.parentElement.parentElement.children).forEach(function (item) {
@@ -2816,20 +2829,25 @@ new Vue({
                 } // Make a request for a user with a given ID
 
 
+                //add tag to url
                 if (tag == null) {
                   url = 'http://localhost/ciblog/users/ajaxindex/' + e.target.innerText;
                 } else {
                   url = 'http://localhost/ciblog/users/ajaxindex/' + tag;
-                }
+                } //then add page for paginations
 
-                _context.next = 7;
+
+                url += '/' + page;
+                _context.next = 12;
                 return axios.get(url).then(function (response) {
                   //if operation code was set add field edit for all user
                   that.userTypes = response.data;
-                  console.log(response.data);
+                  that.rowCounts = Math.ceil(response.data.count / 10);
 
                   if (tag == null) {
                     if (e.target.innerText == 'operation') {
+                      alert('operation edit');
+                      console.log(response.data);
                       that.userTypes.map(function (item) {
                         item.edit = 'edit';
                       });
@@ -2846,7 +2864,7 @@ new Vue({
                 })["finally"](function () {// always executed
                 });
 
-              case 7:
+              case 12:
               case "end":
                 return _context.stop();
             }
@@ -2868,8 +2886,76 @@ new Vue({
       var listclass = Array.from(e.srcElement.parentElement.parentElement.children).forEach(function (item) {
         item.children[0].classList.remove('btn-info');
       });
-    } //end scope => usertype
+    },
+    //end scope => usertype
+    // functionality for pagination with vuejs
+    paginatePage: function paginatePage(e) {
+      var _arguments2 = arguments,
+          _this2 = this;
 
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var tag, that, listclass, page, url;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                tag = _arguments2.length > 1 && _arguments2[1] !== undefined ? _arguments2[1] : null;
+                e.preventDefault();
+                that = _this2; //clearn data
+
+                that.userTypes = null;
+                listclass = Array.from(e.srcElement.parentElement.parentElement.children).forEach(function (item) {
+                  item.children[0].classList.remove('bg-teal');
+                  item.children[0].classList.remove('hvr-wobble-vertical');
+                });
+                e.toElement.classList.add('bg-teal');
+                e.toElement.classList.add('hvr-wobble-vertical');
+
+                if (tag == null) {
+                  page = parseInt(e.target.innerText);
+                  that.currentRow = parseInt(page);
+                } else if (tag == 'prev') {
+                  page = parseInt(that.currentRow) - 1;
+                } else if (tag == 'next') {
+                  page = parseInt(that.currentRow) + 1;
+                } else {}
+
+                that.currentRow = page; // Make a request for a user with a given ID
+
+                //add tag to url
+                url = 'http://localhost/ciblog/users/ajaxindex/' + that.tag; //then add page for paginations
+
+                url += '/' + page * 10;
+                _context2.next = 13;
+                return axios.get(url).then(function (response) {
+                  //if operation code was set add field edit for all user
+                  that.userTypes = response.data;
+
+                  if (that.tag == 'operation') {
+                    that.userTypes.map(function (item) {
+                      item.edit = 'edit';
+                    });
+                  } else if (that.tag == 'fullinfo') {
+                    that.isResponsiveTable = true;
+                  } else {}
+
+                  that.rowCounts = Math.ceil(response.data.count / 10); //get all column value
+
+                  that.columns = Object.keys(that.userTypes[0]);
+                })["catch"](function (error) {
+                  // handle error
+                  console.log(error);
+                })["finally"](function () {// always executed
+                });
+
+              case 13:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    }
   },
   computed: {},
   mounted: function mounted() {

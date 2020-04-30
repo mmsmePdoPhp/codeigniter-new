@@ -14,7 +14,7 @@ class MY_Controller extends CI_Controller {
 		if (!$this->ion_auth->is_admin())
 		{
 		  $this->session->set_flashdata('message', 'You must be an admin to view this page');
-		  redirect('/');
+		  redirect('/auth/login');
 		}
 
 	}

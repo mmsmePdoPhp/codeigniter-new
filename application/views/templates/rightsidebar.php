@@ -248,13 +248,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="<?php echo base_url(); ?>users/create" class="nav-link">
                   <i class="fas fa-plus nav-icon"></i>
                   <p>New User</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="<?php echo base_url(); ?>users/index" class="nav-link">
                   <i class="fas fa-bars nav-icon"></i>     
                   <p>All Users</p>
                 </a>
