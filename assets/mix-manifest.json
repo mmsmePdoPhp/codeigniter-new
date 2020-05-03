@@ -1,6 +1,7 @@
 {
     "/dist/app.js": "/dist/app.js",
     "/dist/app.css": "/dist/app.css",
+    "/dist/author.js": "/dist/author.js",
     "/dist/group.js": "/dist/group.js",
     "/dist/users.js": "/dist/users.js"
 }

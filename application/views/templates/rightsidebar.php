@@ -52,13 +52,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="<?php echo base_url(); ?>book/create" class="nav-link">
                   <i class="fas fa-plus nav-icon"></i>
                   <p>New Book</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="<?php echo base_url(); ?>book/index" class="nav-link">
                   <i class="fas fa-bars nav-icon"></i>     
                   <p>All Books</p>
                 </a>
@@ -151,13 +151,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="<?php echo base_url(); ?>author/create" class="nav-link">
                   <i class="fas fa-plus nav-icon"></i>
                   <p>New Author</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="<?php echo base_url(); ?>author/index" class="nav-link">
                   <i class="fas fa-bars nav-icon"></i>     
                   <p>All Authors</p>
                 </a>
@@ -209,22 +209,22 @@
             <a href="#" class="nav-link">
               <i class="fas fa-users-cog nav-icon"></i> 
               <p>
-                 User Types
+                 User Group
                 <i class="fas fa-angle-left right"></i>
                 <span class="badge badge-info right">6</span>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>usertype/create" class="nav-link">
+                <a href="<?php echo base_url(); ?>group/create" class="nav-link">
                   <i class="fas fa-plus nav-icon"></i>
-                  <p>New User Type</p>
+                  <p>New Group</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>usertype/index" class="nav-link">
+                <a href="<?php echo base_url(); ?>group/index" class="nav-link">
                   <i class="fas fa-bars nav-icon"></i>     
-                  <p>All User Types</p>
+                  <p>All Groups</p>
                 </a>
               </li>
               <li class="nav-item">
