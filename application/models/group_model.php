@@ -47,7 +47,8 @@ class Group_model extends MY_Model
 	{
 		$data = array(
 			'id' => $this->input->post('id'),
-			'groups' => $this->input->post('groups'),
+			'name' => $this->input->post('name'),
+			'description' => $this->input->post('description'),
 			'isactive' => $this->input->post('isactive') == 'on' ? 1 : 0,
 		);
 

@@ -295,16 +295,29 @@ class Group extends MY_Controller
 
 	public function update()
 	{
+		// filter name field
 		$this->form_validation->set_rules(
-			'groups',
-			'groups',
+			'name',
+			'name',
 			'required|min_length[5]|max_length[22]',
 			array(
 				'required'      => 'You have not provided %s.',
 				'is_unique'     => 'This %s already exists.'
 			)
 		);
+		
+		// filter description field
+		$this->form_validation->set_rules(
+			'description',
+			'description',
+			'required|min_length[15]|max_length[99]',
+			array(
+				'required'      => 'You have not provided %s.',
+				'is_unique'     => 'This %s already exists.'
+			)
+		);
 
+		//filter id field
 		$this->form_validation->set_rules(
 			'id',
 			'id',
@@ -316,7 +329,7 @@ class Group extends MY_Controller
 
 		if ($this->form_validation->run() === FALSE) {
 			$this->loadhead();
-			$this->load->view('dashboard/groups/create');
+			$this->load->view('dashboard/groups/edit');
 			$this->loaddown();
 		} else {
 			if ($this->group_model->update_groups()) {
@@ -325,14 +338,14 @@ class Group extends MY_Controller
 				//flash session
 				$this->session->set_flashdata('insert_success', 'groups was successfully updated!');
 
-				redirect('/groups/index', 'refresh');
+				redirect('/group/index', 'refresh');
 
 			} else {
 				//set flahMessage 
 				$this->session->set_flashdata('insert_error', 'groups wasn`t updated!');
 
 				//redirect to create groups
-				redirect('/groups/edit/'.$this->input->post('id'), 'refresh');
+				redirect('/group/edit/'.$this->input->post('id'), 'refresh');
 
 			}
 		}

@@ -8,7 +8,6 @@ class Author_model extends MY_Model
 		$this->load->helper('url');
 		$this->load->helper('date');
 
-
 	}
 
 	/***
@@ -52,19 +51,32 @@ class Author_model extends MY_Model
 	/***
 	 * set new user type in database if not exists
 	 */
-	public function update_author()
+	public function update_author($imagePath)
 	{
+		$updated_at = $this->now = date('Y-m-d h:m:s',now('Asia/Tehran'));
+		//now timestamp with time zone tehran
+
 		$data = array(
 			'id' => $this->input->post('id'),
-			'author' => $this->input->post('author'),
-			'isactive' => $this->input->post('isactive') == 'on' ? 1 : 0,
+			'firstName' => $this->input->post('first_name'),
+			'lastName' => $this->input->post('last_name'),
+			'email' => $this->input->post('email'),
+			'image' => $imagePath,
+			'country' => $this->input->post('country'),
+			'about' => $this->input->post('about'),
+			'city' => $this->input->post('city'),
+			'age' => $this->input->post('age'),
+			'userId' => $this->ion_auth->get_user_id(),
+			'university' => $this->input->post('university'),
+			'publisher' => $this->input->post('publisher'),
+			'updated_at' => $updated_at,
 		);
 
 		//if author not exsit insert
-		$query = $this->db->get_where('author', array('id' => $data['id']));
+		$query = $this->db->get_where('authors', array('id' => $data['id']));
 		if ($query->row_array()) {
 			//if exist update 
-			return $this->db->replace('author', $data);
+			return $this->db->replace('authors', $data);
 			
 		} else {
 			return false; // return false for handle error and redirect user
