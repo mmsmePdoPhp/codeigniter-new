@@ -1,0 +1,115 @@
+.animationStart{
+    animation-name:fadeIn;
+    animation-duration: 0.5s;
+    animation-direction: alternate;
+    animation-delay: 0s;
+    animation-play-state: running;
+    animation-fill-mode: none;
+}
+.spriteAnimationY{
+    -o-animation: spriteAnimationY 0.5s steps(5) infinite;
+    -moz-animation: spriteAnimationY 0.5s steps(5) infinite;
+    -webkit-animation: spriteAnimationY 0.5s steps(5) infinite;
+    animation: spriteAnimationY 0.5s steps(5) infinite;
+}
+.spriteAnimationX{
+    -o-animation: spriteAnimationX 0.5s steps(5) infinite;
+    -moz-animation: spriteAnimationX 0.5s steps(5) infinite;
+    -webkit-animation: spriteAnimationX 0.5s steps(5) infinite;
+    animation: spriteAnimationX 0.5s steps(5) infinite;
+}
+.fadeOut{
+    -o-animation: fadeOut 0.5s both ease-in-out;
+    -moz-animation: fadeOut 0.5s both ease-in-out;
+    -webkit-animation: fadeOut 0.5s both ease-in-out;
+    animation: fadeOut 0.5s both ease-in-out;
+}
+.fadeIn{
+    -o-animation: fadeIn 0.5s both ease-in-out;
+    -moz-animation: fadeIn 0.5s both ease-in-out;
+    -webkit-animation: fadeIn 0.5s both ease-in-out;
+    animation: fadeIn 0.5s both ease-in-out;
+}
+.blowUp{
+    -o-animation: blowUp 0.5s both cubic-bezier(.37,.06,.25,1.25);
+    -moz-animation: blowUp 0.5s both cubic-bezier(.37,.06,.25,1.25);
+    -webkit-animation: blowUp 0.5s both cubic-bezier(.37,.06,.25,1.25);
+    animation: blowUp 0.5s both cubic-bezier(.37,.06,.25,1.25);
+}
+.shrink{
+    -o-animation: shrink 0.5s cubic-bezier(.61,-0.19,.76,.78) both;
+    -moz-animation: shrink 0.5s cubic-bezier(.61,-0.19,.76,.78) both;
+    -webkit-animation: shrink 0.5s cubic-bezier(.61,-0.19,.76,.78) both;
+    animation: shrink 0.5s cubic-bezier(.61,-0.19,.76,.78) both;
+}
+.spin{
+    -o-animation: spin 2s cubic-bezier(.61,-0.19,.76,.78) both;
+    -moz-animation: spin 2s cubic-bezier(.61,-0.19,.76,.78) both;
+    -webkit-animation: spin 2s cubic-bezier(.61,-0.19,.76,.78) both;
+    animation: spin 2s cubic-bezier(.61,-0.19,.76,.78) both;
+}
+.pulse1{
+    -o-animation: pulse1 1s both ease-in-out infinite alternate;
+    -moz-animation: pulse1 1s both ease-in-out infinite alternate;
+    -webkit-animation: pulse1 1s both ease-in-out infinite alternate;
+    animation: pulse1 1s both ease-in-out infinite alternate;
+}
+.glowRed{
+    -o-animation: glowRed 0.2s both ease-in-out infinite alternate;
+    -moz-animation: glowRed 0.2s both ease-in-out infinite alternate;
+    -webkit-animation: glowRed 0.2s both ease-in-out infinite alternate;
+    animation: glowRed 0.2s both ease-in-out infinite alternate;
+}
+.rotateClockWise{
+    -o-animation: rotateClockWise 0.3s both linear infinite;
+    -moz-animation: rotateClockWise 0.3s both linear infinite;
+    -webkit-animation: rotateClockWise 0.3s both linear infinite;
+    animation: rotateClockWise 0.3s both linear infinite;
+}
+.rotateCounterClockWise{
+    -o-animation: rotateCounterClockWise 0.3s both linear infinite;
+    -moz-animation: rotateCounterClockWise 0.3s both linear infinite;
+    -webkit-animation: rotateCounterClockWise 0.3s both linear infinite;
+    animation: rotateCounterClockWise 0.3s both linear infinite;
+}
+.st0{
+    fill:none;stroke:#2D78D3;stroke-width:3;stroke-miterlimit:10; stroke-dasharray: 2000;
+    stroke-dashoffset: 0;
+    -o-animation: dash 4.9s linear forwards;
+    -moz-animation: dash 4.9s linear forwards;
+    -webkit-animation: dash 4.9s linear forwards;
+    animation: dash 4.9s linear forwards;
+}
+.bouncingBall{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    -o-transform-origin: bottom center;
+    -moz-transform-origin: bottom center;
+    -webkit-transform-origin: bottom center;
+    transform-origin: bottom center;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background-color: red;
+    -o-animation: squashAndStretch 1s forwards ease-in-out;
+    -moz-animation: squashAndStretch 1s forwards ease-in-out;
+    -webkit-animation: squashAndStretch 1s forwards ease-in-out;
+    animation: squashAndStretch 1s forwards ease-in-out;
+}
+/*glowing particle*/
+.fractal{
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #98fff2;
+    z-index: 99999;
+    border-radius: 50%;
+    box-shadow: 0 0 25px 5px #9898fc;
+}
+#f1{
+    -o-animation: f1 3s both ease-in-out infinite;
+    -moz-animation: f1 3s both ease-in-out infinite;
+    -webkit-animation: f1 3s both ease-in-out infinite;
+    animation: f1 3s both ease-in-out infinite;
+}

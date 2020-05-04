@@ -1,4 +1,6 @@
-// import all require packages
-//bootstrap vue
+const packageName = require('./awselect/awselect.min');
 
 
+$(document).ready(function(){ 
+	$('select').awselect() 
+});

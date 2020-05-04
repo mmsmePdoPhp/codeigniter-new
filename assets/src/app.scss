@@ -1,4 +1,9 @@
 @import './../node_modules/hover.css/scss/hover';
+@import './cssComponents/keyframes.css';
+@import './cssComponents/animation.css';
+
+//add awselect to project
+@import '././awselect/awselect.min.css';
 
 .bg-custome{
 	background-color: rgb(77, 36, 124) !important;
@@ -13,3 +18,9 @@ background: radial-gradient(circle, rgba(205,63,251,1) 0%, rgba(65,153,219,1) 23
 		font-style: italic;
 	}
 }
+
+
+// code for fade dropdown menue 
+
+
+//end slect fade 

@@ -15,6 +15,8 @@ mix.js('src/app.js', 'dist/')
 .js('src/components/group.js', 'dist/')
 .js('src/components/users.js', 'dist/')
 .js('src/components/author.js', 'dist/')
+.js('src/components/category.js', 'dist/')
+.js('src/components/tag.js', 'dist/')
 .sass('src/app.scss', 'dist/');
 
 // Full API
